@@ -60,50 +60,15 @@ notFoundPage = notFoundPage.encode(encoding='UTF-8')
 while True:
     client_connection, client_address = listen_socket.accept()
     header,body = receive(client_connection)
+    if header is None or body is None:
+        client_connection.close()
+        continue
     header = header.split('\r\n')
     request_data=header[0].split(' ')
     request_data = request_data[1]
-    path_to_data = args[3]+request_data
-    if 'png' in request_data:
-        http_response = """\
-HTTP/1.1 200 OK
-Content-Type: image/png
-Connection: close
-
-"""
-        http_response = http_response.replace('\n','\r\n').encode('UTF-8')
-        try:
-            with open(path_to_data, 'rb') as f:
-                http_response += f.read()
-        except FileNotFoundError:
-            http_response = notFoundPage
-    elif 'jpg' in request_data:
-        http_response = """\
-HTTP/1.1 200 OK
-Content-Type: image/jpeg
-Connection: close
-"""
-        http_response = http_response.replace('\n','\r\n').encode('UTF-8')
-        try:
-            with open(path_to_data, 'rb') as f:
-                http_response += f.read()
-        except FileNotFoundError:
-            http_response = notFoundPage
-    elif 'html' in request_data:
-        http_response = """\
-HTTP/1.1 200 OK
-Content-Type: text/html; charset=UTF-8
-Connection: close
-"""
-        http_response = http_response.replace('\n','\r\n')
-        try:
-            with open(path_to_data, 'r+') as f:
-                http_response += f.read()
-            http_response = http_response.encode(encoding='UTF-8')
-        except FileNotFoundError:
-            http_response = notFoundPage
-
-    else:
+    browser = header[2].split(' ')[-1]
+   
+    if 'Firefox' in browser:
         http_response = """\
 HTTP/1.1 200 OK
 Content-Type: text/html; charset=UTF-8
@@ -113,11 +78,66 @@ Connetction: close
         http_response += """
 <html>
 <body>
-<b>Format Not Supported</b>!
+<b>You should change a browser</b>!
 </body>
 </html>
 """
         http_response = http_response.encode(encoding='UTF-8')
-    print(http_response)
+    else:
+        path_to_data = args[3]+request_data
+        if 'png' in request_data:
+            http_response = """\
+HTTP/1.1 200 OK
+Content-Type: image/png
+Connection: close
+
+"""
+            http_response = http_response.replace('\n','\r\n').encode('UTF-8')
+            try:
+                with open(path_to_data, 'rb') as f:
+                    http_response += f.read()
+            except FileNotFoundError:
+                http_response = notFoundPage
+        elif 'jpg' in request_data:
+            http_response = """\
+HTTP/1.1 200 OK
+Content-Type: image/jpeg
+Connection: close
+"""
+            http_response = http_response.replace('\n','\r\n').encode('UTF-8')
+            try:
+                with open(path_to_data, 'rb') as f:
+                    http_response += f.read()
+            except FileNotFoundError:
+                http_response = notFoundPage
+        elif 'html' in request_data:
+            http_response = """\
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Connection: close
+"""
+            http_response = http_response.replace('\n','\r\n')
+            try:
+                with open(path_to_data, 'r+') as f:
+                    http_response += f.read()
+                http_response = http_response.encode(encoding='UTF-8')
+            except FileNotFoundError:
+                http_response = notFoundPage
+
+        else:
+            http_response = """\
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Connetction: close
+""" 
+            http_response = http_response.replace('\n','\r\n')
+            http_response += """
+<html>
+<body>
+<b>Format Not Supported</b>!
+</body>
+</html>
+"""
+            http_response = http_response.encode(encoding='UTF-8')
     client_connection.sendall(http_response)
     client_connection.close()
