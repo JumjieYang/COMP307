@@ -1,0 +1,29 @@
+body { 
+    font-family:  Arial, Helvetica, sans-serif;
+    background-color: cornsilk; 
+}
+li { font-weight: lighter; 
+    color: red;
+}
+h1, em { text-decoration: underline;
+    text-align: center;
+}
+ul {margin-left: 30px;}
+table {
+    border-collapse: collapse;
+    width: 35%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: floralwhite;}
+
+p {font-size: 15px;}
+
+section {text-align: center;}
+
+a:hover {background-color: gold;}
