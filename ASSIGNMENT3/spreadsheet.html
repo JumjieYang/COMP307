@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spreadsheet</title>
+<style type="text/css">
+  td {
+    padding:3px;
+  }
+</style>
+</head>
+
+<body>
+<table id ="my_Table" border="0" cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Student ID</th>
+      <th>Faculty</th>
+      <th>Major</th>
+      <th>Minor</th>
+      <th>Year</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td>
+        <button>Up</button>
+        <button>Dn</button>
+        <button>Del</button>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td>
+        <button>Up</button>
+        <button>Dn</button>
+        <button>Del</button>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td>
+        <button>Up</button>
+        <button>Dn</button>
+        <button>Del</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button onclick="addRow()" id="newRowBtn">New row</button>
+<script>
+    function addRow(){
+      var table=document.getElementById("my_Table");
+      var newRow = document.createElement("tr");
+      for (var i = 0; i<7; i++)
+      {
+        var temp = document.createElement("td");
+        if (i != 6){
+          temp.innerHTML="<input type=\"text\" />";
+        }
+        else{
+          temp.innerHTML="<button>Up</button> <button>Dn</button> <button>Del</button>";
+
+        }
+        newRow.appendChild(temp);
+      }
+      table.appendChild(newRow);
+    }
+
+</script>
+</body>
+
+</html>
