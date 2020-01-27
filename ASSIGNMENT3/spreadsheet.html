@@ -31,9 +31,9 @@
       <td><input type="text" /></td>
       <td><input type="text" /></td>
       <td>
-        <button>Up</button>
-        <button>Dn</button>
-        <button>Del</button>
+        <button onclick="moveUp(this)">Up</button>
+        <button onclick="moveDown(this)">Dn</button>
+        <button onclick="deleteRow(this)">Del</button onclick="deleteRow(this)">
       </td>
     </tr>
     <tr>
@@ -44,9 +44,9 @@
       <td><input type="text" /></td>
       <td><input type="text" /></td>
       <td>
-        <button>Up</button>
-        <button>Dn</button>
-        <button>Del</button>
+        <button onclick="moveUp(this)">Up</button>
+        <button onclick="moveDown(this)">Dn</button>
+        <button onclick="deleteRow(this)">Del</button>
       </td>
     </tr>
     <tr>
@@ -57,9 +57,9 @@
       <td><input type="text" /></td>
       <td><input type="text" /></td>
       <td>
-        <button>Up</button>
-        <button>Dn</button>
-        <button>Del</button>
+        <button onclick="moveUp(this)">Up</button>
+        <button onclick="moveDown(this)">Dn</button>
+        <button onclick="deleteRow(this)">Del</button onclick="deleteRow(this)">
       </td>
     </tr>
   </tbody>
@@ -76,12 +76,58 @@
           temp.innerHTML="<input type=\"text\" />";
         }
         else{
-          temp.innerHTML="<button>Up</button> <button>Dn</button> <button>Del</button>";
+          temp.innerHTML="<button onclick=\"moveUp(this)\">Up</button> "
+          temp.innerHTML+="<button onclick=\"moveDown(this)\">Dn</button>"
+          temp.innerHTML +=" <button onclick=\"deleteRow(this)\">Del</button>";
 
         }
         newRow.appendChild(temp);
       }
       table.appendChild(newRow);
+    }
+
+    function moveUp(button){
+      var row = button.parentNode.parentNode;
+      
+      var node = row.previousSibling;
+      while ( node && node.nodeType != 1){
+        node = node.previousSibling;
+      }
+      if (node){
+        swapNode(row, node);
+      }
+    }
+
+    function moveDown(button){
+      var row = button.parentNode.parentNode;
+      
+      var node = row.nextSibling;
+      while ( node && node.nodeType != 1){
+        node = node.nextSibling;
+      }
+      if (node){
+        swapNode(row, node);
+      }
+    }
+
+    function deleteRow(button){
+      var row = button.parentNode.parentNode;
+      row.remove();
+    }
+    
+    function swapNode(node1, node2){
+      var parent = node1.parentNode;
+
+      var data1 = node1.nextSibling;
+      var data2 = node2.nextSibling;
+      if (data1)
+        parent.insertBefore(node2,data1);
+      else
+        parent.appendChild(node2);
+      if(t2)
+        parent.insertBefore(node1,data2);
+      else
+        parent.appendChild(node1);
     }
 
 </script>
