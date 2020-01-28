@@ -33,7 +33,7 @@
       <td>
         <button onclick="moveUp(this)">Up</button>
         <button onclick="moveDown(this)">Dn</button>
-        <button onclick="deleteRow(this)">Del</button onclick="deleteRow(this)">
+        <button onclick="deleteRow(this)">Del</button>
       </td>
     </tr>
     <tr>
@@ -67,7 +67,7 @@
 <button onclick="addRow()" id="newRowBtn">New row</button>
 <script>
     function addRow(){
-      var table=document.getElementById("my_Table");
+      var table=document.getElementById("my_Table").getElementsByTagName("tbody")[0];
       var newRow = document.createElement("tr");
       for (var i = 0; i<7; i++)
       {
@@ -100,7 +100,6 @@
 
     function moveDown(button){
       var row = button.parentNode.parentNode;
-      
       var node = row.nextSibling;
       while ( node && node.nodeType != 1){
         node = node.nextSibling;
@@ -117,14 +116,14 @@
     
     function swapNode(node1, node2){
       var parent = node1.parentNode;
-
+      
       var data1 = node1.nextSibling;
       var data2 = node2.nextSibling;
       if (data1)
         parent.insertBefore(node2,data1);
       else
         parent.appendChild(node2);
-      if(t2)
+      if (data2)
         parent.insertBefore(node1,data2);
       else
         parent.appendChild(node1);
