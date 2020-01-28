@@ -24,12 +24,12 @@
   </thead>
   <tbody>
     <tr>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
       <td>
         <button onclick="moveUp(this)">Up</button>
         <button onclick="moveDown(this)">Dn</button>
@@ -37,12 +37,12 @@
       </td>
     </tr>
     <tr>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
       <td>
         <button onclick="moveUp(this)">Up</button>
         <button onclick="moveDown(this)">Dn</button>
@@ -50,12 +50,12 @@
       </td>
     </tr>
     <tr>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
+      <td><input type="text" onfocus="highLight(this)" onblur ="backtoNormal(this)"/></td>
       <td>
         <button onclick="moveUp(this)">Up</button>
         <button onclick="moveDown(this)">Dn</button>
@@ -73,7 +73,7 @@
       {
         var temp = document.createElement("td");
         if (i != 6){
-          temp.innerHTML="<input type=\"text\" />";
+          temp.innerHTML="<input type=\"text\" onfocus=\"highLight(this)\" onblur =\"backtoNormal(this)\"/>";
         }
         else{
           temp.innerHTML="<button onclick=\"moveUp(this)\">Up</button> "
@@ -107,6 +107,14 @@
       if (node){
         swapNode(row, node);
       }
+    }
+
+    function highLight(input){
+      input.parentNode.parentNode.style.backgroundColor="yellow";
+    }
+
+    function backtoNormal(input){
+      input.parentNode.parentNode.style.backgroundColor="white";
     }
 
     function deleteRow(button){
