@@ -27,19 +27,6 @@
   </thead>
   <tbody>
     <tr>
-      <td><input type="text" onclick="highLight(this)" /></td>
-      <td><input type="text" onfocus="highLight(this)" /></td>
-      <td><input type="text" onfocus="highLight(this)" /></td>
-      <td><input type="text" onfocus="highLight(this)" /></td>
-      <td><input type="text" onfocus="highLight(this)" /></td>
-      <td><input type="text" onfocus="highLight(this)" /></td>
-      <td>
-        <button onclick="moveUp(this)">Up</button>
-        <button onclick="moveDown(this)">Dn</button>
-        <button onclick="deleteRow(this)">Del</button>
-      </td>
-    </tr>
-    <tr>
       <td><input type="text" onfocus="highLight(this)" /></td>
       <td><input type="text" onfocus="highLight(this)" /></td>
       <td><input type="text" onfocus="highLight(this)" /></td>
@@ -63,6 +50,19 @@
         <button onclick="moveUp(this)">Up</button>
         <button onclick="moveDown(this)">Dn</button>
         <button onclick="deleteRow(this)">Del</button>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="text" onfocus="highLight(this)" /></td>
+      <td><input type="text" onfocus="highLight(this)" /></td>
+      <td><input type="text" onfocus="highLight(this)" /></td>
+      <td><input type="text" onfocus="highLight(this)" /></td>
+      <td><input type="text" onfocus="highLight(this)" /></td>
+      <td><input type="text" onfocus="highLight(this)" /></td>
+      <td>
+        <button onclick="moveUp(this)" >Up</button>
+        <button onclick="moveDown(this)" >Dn</button>
+        <button onclick="deleteRow(this)" >Del</button>
       </td>
     </tr>
   </tbody>
@@ -91,7 +91,6 @@
 
     function moveUp(button){
       var row = button.parentNode.parentNode;
-      
       var node = row.previousSibling;
       while ( node && node.nodeType != 1){
         node = node.previousSibling;
@@ -99,6 +98,12 @@
       if (node){
         swapNode(row, node);
       }
+      var rows=document.getElementsByTagName("tr")
+      for (var i =1; i<rows.length; i++)
+      {
+        rows[i].className="";
+      }
+      row.className="highlight";
     }
 
     function moveDown(button){
@@ -110,14 +115,20 @@
       if (node){
         swapNode(row, node);
       }
+      var rows=document.getElementsByTagName("tr")
+      for (var i =1; i<rows.length; i++)
+      {
+        rows[i].className="";
+      }
+      row.className="highlight";
     }
 
     function highLight(input){
-    var rows=document.getElementsByTagName("tr")
-    for (var i =1; i<rows.length; i++)
-    {
-    rows[i].className="";
-    }
+      var rows=document.getElementsByTagName("tr")
+      for (var i =1; i<rows.length; i++)
+      {
+      rows[i].className="";
+      }
       input.parentNode.parentNode.className="highlight";
     }
 
