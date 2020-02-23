@@ -8,9 +8,19 @@
     $stmt -> bind_param("ss", $username, $password);
 
     $username = strip_tags(htmlspecialchars($_POST['username']));
-    $password = password_hash(
-        strip_tags(htmlspecialchars($_POST['password'])),PASSWORD_DEFAULT);
+    $password = strip_tags(htmlspecialchars($_POST['password']));
 
+    if(strlen($password)!= 0)
+    {
+    $password = password_hash($password,PASSWORD_DEFAULT);
+    }
     $success=$stmt -> execute();
-    print($success);
+    if ($success)
+    {
+        print("<br/>Sign Up successful");
+    }
+    else
+    {
+        print("<br/>Please check your input");
+    }
     ?>

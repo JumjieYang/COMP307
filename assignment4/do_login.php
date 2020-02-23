@@ -3,8 +3,8 @@
 session_start();
 ?>
 
-    <?php include 'connect.php'?>
-    <?php include 'menu.html'?>
+    <?php include 'menu.html';?>
+    <?php include 'connect.php';?>
     <?php
     $stmt = $conn -> prepare("select * from user where username=?");
 
@@ -27,11 +27,11 @@ $stmt->execute();
         $passowrd = strip_tags(htmlspecialchars($_POST['password']));
         if (password_verify($passowrd, $row['password']))
         {
-            print("Hi ".$row['username'].', you are logged in.');
+            print("<br/>Hi ".$row['username'].', you are logged in.');
             $_SESSION['username'] = $row['username'];
         }
         else{
-            print('Wrong password.');
+            print('<br/>Wrong password.');
         }
     }
     ?>

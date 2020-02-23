@@ -2,7 +2,7 @@
     <form id="postForm">
         Title <input type="text" name = "title"/><br />
         Content<br /><textarea name="content" style="width:400px;height:150px"></textarea><br/>
-        <input id ="postSubmit" type ="button" value="Submit post"></button>
+        <input id ="postSubmit" type ="button" value="Submit post">
 </form>
 </p>
 
