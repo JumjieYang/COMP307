@@ -1,11 +1,8 @@
-<body>
 <?php
 
 session_start();
 
 ?>
-
-<?php include 'menu.html'; ?>
 <?php include 'connect.php';?>
 <?php
     $stmt = $conn -> prepare("select * from user where username=?");
@@ -19,22 +16,17 @@ session_start();
 <?php
 
     $stmt = $conn -> prepare("insert into post (creator, title, content) values (?, ?, ?)");
-    
-    $stmt -> bind_param("iss",$creater, $title, $content);
-    $creater = $row['id'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $success = $stmt -> execute();
+    $stmt -> bind_param("iss",$creator, $title, $content);
+    $creator = $row['id'];
+    $title = htmlspecialchars($_POST['title']);
+    $title = strip_tags($title);
+
+    $content = htmlspecialchars($_POST['content']);
+    $content =strip_tags($content);
+    $stmt -> execute();
+
+    $data = array('creator' => $_SESSION['username'], 'title' => $title, 'content' => $content);
+    $json_obj = json_encode($data);
+
+    print($json_obj);
     ?>
-    <p>
-        <?php
-        if (!$success)
-        {
-            print ("Unable to create post". $stmt -> error);
-        }
-        else
-        {
-            print ("Successfully create post");
-        }
-        ?>
-</body>

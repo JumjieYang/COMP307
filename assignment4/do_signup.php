@@ -1,29 +1,16 @@
-<body>
-    <?php include 'menu.html'; ?>
-    <?php include 'connect.php';?>
 
+    <?php include 'connect.php';?>
+    <?php include 'menu.html';?>
     <?php
 
     $stmt = $conn -> prepare("insert into user (username, password) values (?, ?)");
 
     $stmt -> bind_param("ss", $username, $password);
 
-    $username = $_POST['username'];
+    $username = strip_tags(htmlspecialchars($_POST['username']));
     $password = password_hash(
-        $_POST['password'],PASSWORD_DEFAULT);
+        strip_tags(htmlspecialchars($_POST['password'])),PASSWORD_DEFAULT);
 
-    $success = $stmt -> execute();
+    $success=$stmt -> execute();
+    print($success);
     ?>
-    <p>
-        <?php
-        if (!$success)
-        {
-            print ("Sign up failed ". $stmt -> error);
-        }
-        else
-        {
-            print ("Sign up successful");
-        }
-        ?>
-    </p>
-    </body>

@@ -3,10 +3,8 @@
 session_start();
 ?>
 
-<body>
-    <?php include 'menu.html'?>
     <?php include 'connect.php'?>
-
+    <?php include 'menu.html'?>
     <?php
     $stmt = $conn -> prepare("select * from user where username=?");
 
@@ -14,11 +12,10 @@ session_start();
     $username
 );
 
-$username = $_POST['username'];
+$username = htmlspecialchars($_POST['username']);
+$username = strip_tags($username);
 $stmt->execute();
 ?>
-
-<p>
     <?php
     $result = $stmt -> get_result();
     if ($result->num_rows == 0)
@@ -27,7 +24,8 @@ $stmt->execute();
     }
     else {
         $row = $result -> fetch_assoc();
-        if (password_verify($_POST['password'], $row['password']))
+        $passowrd = strip_tags(htmlspecialchars($_POST['password']));
+        if (password_verify($passowrd, $row['password']))
         {
             print("Hi ".$row['username'].', you are logged in.');
             $_SESSION['username'] = $row['username'];
@@ -37,5 +35,3 @@ $stmt->execute();
         }
     }
     ?>
-</p>
-</body>

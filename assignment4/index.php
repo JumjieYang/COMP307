@@ -8,34 +8,33 @@ session_start();
     <?php include 'connect.php';?>
     </p>
     <h3> Posts </h3>
-    <p>
     <?php
         $stmt = $conn -> prepare("select * from post");
         $stmt -> execute();
         ?>
-
+    <div id="posts">
         <?php
         $result = $stmt -> get_result();
         if ($result->num_rows == 0)
         {
-            print("user not found");
+            print("No posts available <br/>");
         }
         else {
                 while($row = $result -> fetch_assoc())
                 {
-                print("<p><b>Title:".$row['title']."</b></p>");
+                print(" <fieldset><b>Title:".$row['title']."</b><br/>");
                 $stmt = $conn -> prepare("select * from user where id=?");
                 $stmt -> bind_param("i",
                 $row['creator']);
                 $stmt -> execute();
                 $answer = $stmt -> get_result();
                 $answerRow = $answer -> fetch_assoc();
-                print("<p>By:".$answerRow['username']."</p>");
-                print($row['content']);
+                print("By:".$answerRow['username']."<br />");
+                print($row['content']."</fieldset><br/>");
                 }
             }
     ?>
-    </p>
+    </div>
     <?php
         if (isset ($_SESSION['username']))
         {
